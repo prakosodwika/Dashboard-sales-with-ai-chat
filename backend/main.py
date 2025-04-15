@@ -1,9 +1,19 @@
+from helpers import setup_exception_handlers
+from middlewares.cors import setup_cors
+from routers.sales_router import sales_router
 from fastapi import FastAPI, Request
-from fastapi.middleware.cors import CORSMiddleware
+from dotenv import load_dotenv
 import uvicorn
 import json
+import os 
 
 app = FastAPI()
+
+load_dotenv()
+setup_cors(app)
+setup_exception_handlers(app)
+
+app.include_router(sales_router, prefix="/api")
 
 # Load dummy data
 with open("dummyData.json", "r") as f:
@@ -29,5 +39,12 @@ async def ai_endpoint(request: Request):
     # Replace with real AI logic as desired (e.g., call to an LLM).
     return {"answer": f"This is a placeholder answer to your question: {user_question}"}
 
+print(f"ini saya port: {os.getenv('PORT')}")
+
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run(
+        "main:app", 
+        host= "0.0.0.0", 
+        port= int(os.getenv("PORT", 8000)), 
+        reload= True
+    )
