@@ -1,0 +1,36 @@
+
+---
+
+### 🔒 `.gitignore`
+
+```gitignore
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Env
+.env
+venv/
+ENV/
+env/
+.venv/
+.Python
+*.env
+
+# VSCode
+.vscode/
+
+# macOS
+.DS_Store
+
+# Pytest
+.pytest_cache/
+
+# Coverage reports
+htmlcov/
+.coverage
+.tox/
+.nox/
+.cache/
