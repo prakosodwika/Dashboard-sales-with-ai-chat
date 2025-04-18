@@ -1,39 +1,9 @@
 "use client"
 
-import { ColumnDef } from "@tanstack/react-table"
-import { MoreHorizontal } from "lucide-react"
+import { Sales } from "./types"
 import { ArrowUpDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-
-export type Sales = {
-  id: number
-  name: string
-  role: string
-  region: string
-  skills: string[]
-  deals: Deal[]
-  clients: Client[]
-}
-
-export type Deal = {
-  client: string
-  value: number
-  status: string
-}
-
-export type Client = {
-  name: string
-  industry: string
-  contact: string
-}
+import { ColumnDef } from "@tanstack/react-table"
 
 export const columns: ColumnDef<Sales>[] = [
   {
@@ -42,7 +12,9 @@ export const columns: ColumnDef<Sales>[] = [
       return (
         <Button
           variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          onClick={() => column.toggleSorting(
+            column.getIsSorted() === "asc"
+          )}
         >
           Name
           <ArrowUpDown className="ml-2 h-4 w-4" />
@@ -56,7 +28,9 @@ export const columns: ColumnDef<Sales>[] = [
       return (
         <Button
           variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          onClick={() => column.toggleSorting(
+            column.getIsSorted() === "asc"
+          )}
         >
           Role
           <ArrowUpDown className="ml-2 h-4 w-4" />
@@ -70,7 +44,9 @@ export const columns: ColumnDef<Sales>[] = [
       return (
         <Button
           variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          onClick={() => column.toggleSorting(
+            column.getIsSorted() === "asc"
+          )}
         >
           Region
           <ArrowUpDown className="ml-2 h-4 w-4" />
@@ -90,7 +66,9 @@ export const columns: ColumnDef<Sales>[] = [
   {
     id: "statusDeals",
     header: () => <div className="text-center font-medium">Deals Closed Won</div>,
-    accessorFn: (row) => row.deals.filter(deal => deal.status === "Closed Won").length,
+    accessorFn: (row) => row.deals.filter(
+      deal => deal.status === "Closed Won"
+    ).length,
     cell: ({ getValue }) => {
       const raw = getValue() as string
       return <div className="text-center font-medium">{raw}</div>
@@ -103,14 +81,18 @@ export const columns: ColumnDef<Sales>[] = [
       return (
         <Button
           variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          onClick={() => column.toggleSorting(
+            column.getIsSorted() === "asc"
+          )}
         >
           Total Deal Value
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       )
     },
-    accessorFn: (row) => row.deals.reduce((sum, deal) => sum + deal.value, 0),
+    accessorFn: (row) => row.deals.reduce(
+      (sum, deal) => sum + deal.value, 0
+    ),
     cell: ({ getValue }) => {
       const raw = getValue() as number
       const formatted = new Intl.NumberFormat("en-US", {

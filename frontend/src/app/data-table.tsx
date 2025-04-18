@@ -1,65 +1,66 @@
 "use client"
 
 import * as React from "react"
+import { Input } from "@/components/ui/input"
 import {
   ColumnDef,
   flexRender,
   SortingState,
+  useReactTable,
+  getCoreRowModel,
   VisibilityState,
+  getSortedRowModel,
   ColumnFiltersState,
   getFilteredRowModel,
-  getSortedRowModel,
-  getCoreRowModel,
   getPaginationRowModel,
-  useReactTable,
 } from "@tanstack/react-table"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import {
   DropdownMenu,
-  DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuTrigger,
+  DropdownMenuCheckboxItem,
 } from "@/components/ui/dropdown-menu"
 import {
   Table,
+  TableRow,
   TableBody,
   TableCell,
   TableHead,
   TableHeader,
-  TableRow,
 } from "@/components/ui/table"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
-  data: TData[]
   isLoading?: boolean
+  data: TData[]
 }
 
 export function DataTable<TData, TValue>({ 
-  columns, data, isLoading = false
+  isLoading = false,
+  columns, 
+  data, 
 }: DataTableProps<TData, TValue>) {
-  const [sorting, setSorting] = React.useState<SortingState>([])
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
-  )
-  const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({})
+  const [columnFilters, setColumnFilters] = React
+    .useState<ColumnFiltersState>([])
+
+  const [sorting, setSorting] = React
+    .useState<SortingState>([])
+
+  const [columnVisibility, setColumnVisibility] = React.
+    useState<VisibilityState>({})
+
   const table = useReactTable({
     data,
     columns,
-    getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
     onSortingChange: setSorting,
+    getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
-    state: {
-      sorting,
-      columnFilters,
-      columnVisibility,
-    },
+    getPaginationRowModel: getPaginationRowModel(),
+    state: { sorting, columnFilters, columnVisibility, },
   })
 
   return (
@@ -73,12 +74,14 @@ export function DataTable<TData, TValue>({
           }
           className="max-w-sm"
         />
+
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto">
               Columns
             </Button>
           </DropdownMenuTrigger>
+
           <DropdownMenuContent align="end">
             {table
               .getAllColumns()
@@ -102,6 +105,7 @@ export function DataTable<TData, TValue>({
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
+
       <div className="rounded-md border">
         <Table>
           <TableHeader className="bg-muted">
@@ -122,6 +126,7 @@ export function DataTable<TData, TValue>({
               </TableRow>
             ))}
           </TableHeader>
+
           <TableBody>
             {isLoading ? (
               [...Array(5)].map((_, i) => (
@@ -159,6 +164,7 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
+
       <div className="flex items-center justify-end space-x-2 py-4">
         <Button
           variant="outline"
@@ -168,6 +174,7 @@ export function DataTable<TData, TValue>({
         >
           Previous
         </Button>
+
         <Button
           variant="outline"
           size="sm"
