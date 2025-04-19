@@ -4,7 +4,7 @@ import os
 
 load_dotenv()
 
-app_url_frontend = os.getenv("APP_URL")
+app_url_frontend = os.getenv("FRONTEND_URL")
 
 def setup_cors(app):
   origins = [

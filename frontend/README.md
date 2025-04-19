@@ -1,18 +1,57 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+## Features
 
-First, run the development server:
+This project includes the following features:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Filter by Name**: Allows users to search and filter content by name.
+- **Show/Hide Columns (Dropdown)**: Users can toggle the visibility of specific columns.
+- **Pagination**: Implemented to break large datasets into manageable pages.
+- **Chat AI Integration**: A chat interface powered by AI to interact with the app and answer questions.
+
+## Project Structure
+
 ```
+├── src/              
+│   ├── app/
+│   │    ├── ai-sheet.tsx
+│   │    ├── columns.tsx
+│   │    ├── data-table.tsx
+│   │    └── page.tsx
+│   ├── components/
+│   ├── lib/
+│   │    ├── fetcher.ts
+│   │    └── types.ts
+│   ├── layout.tsx
+│   └── page.tsx
+├── public/        
+├── components.json            
+├── env.example         
+├── tsconfig.json              
+```
+
+## Setup Instructions
+
+1. **Install dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+2. **Copy file environment file**:
+    ```bash
+    cp env.example .env.local
+    ```
+
+4. **Run the Next.Js server**:
+    ```bash
+    npm run dev
+    # or
+    yarn dev
+    # or
+    pnpm dev
+    # or
+    bun dev
+    ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 

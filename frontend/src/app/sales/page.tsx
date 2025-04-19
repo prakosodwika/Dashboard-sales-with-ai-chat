@@ -1,10 +1,11 @@
 "use client"
 
-import { toast, Toaster } from "sonner";
-import { getSalesReps } from "./fetcher";
-import { DataTable } from "./data-table";
+import AISheet from "./ai-sheet";
 import { columns } from "./columns";
-import { Sales } from "./types";
+import { toast, Toaster } from "sonner";
+import { Sales } from "../../lib/types";
+import { DataTable } from "./data-table";
+import { getSalesReps } from "../../lib/fetcher";
 import React, { useEffect, useState } from "react"
 import {
   Card,
@@ -22,8 +23,8 @@ export default function SalesReps() {
     const fetchData = async () => {
       setLoading(true)
       try {
-        const res = await getSalesReps()
-        setData(res)
+        const data = await getSalesReps()
+        setData(data)
       } catch (error) {
         toast.error("Failed to fetch data. Please try again later.", {
           style: {
@@ -42,9 +43,13 @@ export default function SalesReps() {
   return (
     <div className="container mx-auto py-10">
       <Card>
-        <CardHeader>
-          <CardTitle>Sales Reps Overview</CardTitle>
-          <CardDescription>Overview of the individual sales reps’ performance and activities.</CardDescription>
+        <CardHeader className="flex justify-between items-center">
+          <div>
+            <CardTitle className="mb-2">Sales Representatives Overview</CardTitle>
+            <CardDescription>Overview of the individual sales reps’ performance and activities.</CardDescription>
+          </div>
+          
+          <AISheet />
         </CardHeader>
 
         <CardContent>

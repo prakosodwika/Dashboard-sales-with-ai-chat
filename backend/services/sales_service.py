@@ -37,7 +37,8 @@ class SalesService:
     try:
       data = self.repository.get_all()
       context = f"""
-      Below is the information about the sales representatives:
+      Below is the information about the sales representatives.
+      Although the data is structured in a JSON-like format, please interpret it as if it were a table for better readability and understanding.
       {data}
 
       Please answer the following question:
