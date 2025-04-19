@@ -34,7 +34,11 @@ This project includes the following features:
 
 1. **Install dependencies**:
    ```bash
-   pip install -r requirements.txt
+    npm install
+    #or
+    pnpm install
+    #or
+    bun install
    ```
 
 2. **Copy file environment file**:
