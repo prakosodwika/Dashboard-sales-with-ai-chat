@@ -1,10 +1,14 @@
-import os
 from fastapi.middleware.cors import CORSMiddleware
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+app_url_frontend = os.getenv("APP_URL")
 
 def setup_cors(app):
   origins = [
-    "http://localhost:3000",
-    # "https://your-frontend-domain.com",
+    app_url_frontend,
   ]
 
   app.add_middleware(

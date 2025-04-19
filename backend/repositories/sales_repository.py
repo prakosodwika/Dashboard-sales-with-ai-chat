@@ -1,13 +1,20 @@
-from fastapi import HTTPException
 from config.data_provider import DataProvider
+from fastapi import HTTPException
+from dotenv import load_dotenv
 from models import Sales
 import math
 import os
-app_url = os.getenv("APP_URL", "http://127.0.0.1")
-port = os.getenv("PORT", "8000")
+
+load_dotenv()
+
+app_url = os.getenv("APP_URL")
+port = os.getenv("PORT")
 
 class SalesRepository:
-  def __init__(self, data_path: str = "dummyData.json"):
+  def __init__(
+      self, 
+      data_path: str = "dummyData.json", 
+    ):
     self.data_provider = DataProvider(data_path)
     try:
       self.data = self.data_provider.load_data()
@@ -57,6 +64,20 @@ class SalesRepository:
         "total": total
       }
 
+    except KeyError as e:
+      print(f"err re: {str(e)}")
+      raise HTTPException(500, detail=f"Missing expected key in sales data: {str(e)}")
+    except Exception as e:
+      print(f"err re: {str(e)}")
+      raise Exception("Internal server error")
+    
+  def get_all(self) -> list:
+    if 'salesReps' not in self.data:
+      raise HTTPException(404, detail="'salesReps' data not found")
+    
+    try:
+      sales_reps = self.data['salesReps']
+      return [Sales(**rep).model_dump() for rep in sales_reps]
     except KeyError as e:
       print(f"err re: {str(e)}")
       raise HTTPException(500, detail=f"Missing expected key in sales data: {str(e)}")
