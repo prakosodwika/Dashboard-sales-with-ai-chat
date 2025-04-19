@@ -46,7 +46,14 @@
     ```bash
     cp .env.example .env
 
-4. **Run the FastAPI server**:
+4. **Obtain the API Key**:
+    - Go to: https://makersuite.google.com/app
+
+    - Log in with your Google account.
+
+    - Get your API key from: https://aistudio.google.com/app/apikey
+
+5. **Run the FastAPI server**:
     ```bash
     uvicorn main:app --reload
     
