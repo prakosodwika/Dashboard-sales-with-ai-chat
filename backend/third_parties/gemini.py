@@ -14,7 +14,7 @@ class GeminiAI:
       genai.configure(api_key=self.api_key)
       self.model = genai.GenerativeModel(model_name)
     except Exception as e:
-      print(f"Failed to initialize GeminiAI: {str(e)}")
+      print(f"err GeminiAI: {str(e)}")
       raise Exception("Failed to configure Gemini AI")
 
   def ask(self, question: str) -> dict:
@@ -22,5 +22,5 @@ class GeminiAI:
       response = self.model.generate_content(question)
       return response.text
     except Exception as e:
-      print(f"Error in Gemini AI: {str(e)}")
+      print(f"err AI: {str(e)}")
       raise Exception("Internal Server Error")
