@@ -1,5 +1,5 @@
-from typing import Any
 from fastapi.responses import JSONResponse
+from typing import Any
 
 _STATUS_TEXTS = {
     200: 'OK',

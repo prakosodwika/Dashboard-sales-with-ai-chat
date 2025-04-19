@@ -1,9 +1,8 @@
-import json
-import os
+from fastapi import HTTPException
 from pathlib import Path
 from typing import Dict
-from fastapi import HTTPException
-
+import json
+import os
 
 class DataProvider:
   def __init__(self, data_path: str):
