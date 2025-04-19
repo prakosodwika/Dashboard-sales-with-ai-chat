@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
 import {
   ColumnDef,
   flexRender,
@@ -14,7 +15,6 @@ import {
   getFilteredRowModel,
   getPaginationRowModel,
 } from "@tanstack/react-table"
-import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -65,19 +65,10 @@ export function DataTable<TData, TValue>({
 
   return (
     <div>
-      <div className="flex items-center py-4">
-        <Input
-          placeholder="Filter names..."
-          value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("name")?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm"
-        />
-
+      <div className="flex justify-between items-center py-4">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
+            <Button variant="outline">
               Columns
             </Button>
           </DropdownMenuTrigger>
@@ -104,6 +95,15 @@ export function DataTable<TData, TValue>({
               })}
           </DropdownMenuContent>
         </DropdownMenu>
+
+        <Input
+          placeholder="Filter names..."
+          value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
+          onChange={(event) =>
+            table.getColumn("name")?.setFilterValue(event.target.value)
+          }
+          className="max-w-sm"
+        />
       </div>
 
       <div className="rounded-md border">
