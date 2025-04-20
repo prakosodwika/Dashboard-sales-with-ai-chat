@@ -4,6 +4,8 @@ import { Sales } from "../../lib/types"
 import { ArrowUpDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ColumnDef } from "@tanstack/react-table"
+import { ModalClient } from "./details/client/detail"
+import { ModalDeal } from "./details/deal/detail"
 
 export const columns: ColumnDef<Sales>[] = [
   {
@@ -15,9 +17,10 @@ export const columns: ColumnDef<Sales>[] = [
           onClick={() => column.toggleSorting(
             column.getIsSorted() === "asc"
           )}
+          className="!px-0"
         >
           Name
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <ArrowUpDown className="h-4 w-4" />
         </Button>
       )
     },
@@ -31,9 +34,10 @@ export const columns: ColumnDef<Sales>[] = [
           onClick={() => column.toggleSorting(
             column.getIsSorted() === "asc"
           )}
+          className="!px-0"
         >
           Role
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <ArrowUpDown className="h-4 w-4" />
         </Button>
       )
     },
@@ -47,16 +51,25 @@ export const columns: ColumnDef<Sales>[] = [
           onClick={() => column.toggleSorting(
             column.getIsSorted() === "asc"
           )}
+          className="!px-0"
         >
           Region
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <ArrowUpDown className="h-4 w-4" />
         </Button>
       )
     },
   },
   {
     id: "amountDeals",
-    header: () => <div className="text-center font-medium">Amount Deals</div>,
+    header: () => {
+      return (
+        <div className="text-center font-medium">
+          <span>
+            Amount <br /> Deals
+          </span>
+        </div>
+      )
+    },
     accessorFn: (row) => row.deals.length,
     cell: ({ getValue }) => {
       const raw = getValue() as number
@@ -65,7 +78,15 @@ export const columns: ColumnDef<Sales>[] = [
   },
   {
     id: "statusDeals",
-    header: () => <div className="text-center font-medium">Deals Closed Won</div>,
+    header: () => {
+      return (
+        <div className="text-center font-medium">
+          <span>
+            Status Deals <br /> (Closed Won)
+          </span>
+        </div>
+      )
+    },
     accessorFn: (row) => row.deals.filter(
       deal => deal.status === "Closed Won"
     ).length,
@@ -75,8 +96,24 @@ export const columns: ColumnDef<Sales>[] = [
     }
   },
   {
+    id: "amountOfClients",
+    header: () => {
+      return (
+        <div className="text-center font-medium">
+          <span>
+            Amount of <br /> Clients
+          </span>
+        </div>
+      )
+    },
+    accessorFn: (row) => row.clients.length,
+    cell: ({ getValue }) => {
+      const raw = getValue() as number
+      return <div className="text-center font-medium">{raw}</div>
+    }
+  },
+  {
     id: "amountValueDeals",
-    // header: () => <div className="text-right font-medium">Amount Value Deals</div>,
     header: ({ column }) => {
       return (
         <Button
@@ -84,9 +121,12 @@ export const columns: ColumnDef<Sales>[] = [
           onClick={() => column.toggleSorting(
             column.getIsSorted() === "asc"
           )}
+          className="!px-0"
         >
-          Total Deal Value
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <span>
+            Total Deal Value
+          </span>
+          <ArrowUpDown className="h-4 w-4" />
         </Button>
       )
     },
@@ -100,36 +140,40 @@ export const columns: ColumnDef<Sales>[] = [
         currency: "USD",
       }).format(raw)
     
-      return <div className="text-center font-medium">{formatted}</div>
-    }
-  },
-  {
-    id: "amountOfClients",
-    header: () => <div className="text-center font-medium">Amount of Clients</div>,
-    accessorFn: (row) => row.clients.length,
-    cell: ({ getValue }) => {
-      const raw = getValue() as number
-      return <div className="text-center font-medium">{raw}</div>
+      return <div className="text-end font-medium">{formatted}</div>
     }
   },
   {
     header: "Skills",
-  accessorKey: "skills",
-  cell: ({ getValue }) => {
-    const skills = getValue() as string[]
+    accessorKey: "skills",
+    cell: ({ getValue }) => {
+      const skills = getValue() as string[]
 
-    return (
-      <div className="flex flex-wrap gap-2">
-        {skills.map((skill, index) => (
-          <span
-            key={index}
-            className="bg-blue-100 text-blue-800 text-xs font-medium px-2 py-1 rounded-full"
-          >
-            {skill}
-          </span>
-        ))}
-      </div>
-    )
+      return (
+        <div className="flex flex-wrap gap-2">
+          {skills.map((skill, index) => (
+            <span
+              key={index}
+              className="bg-blue-100 text-blue-800 text-xs font-medium px-2 py-1 rounded-full"
+            >
+              {skill}
+            </span>
+          ))}
+        </div>
+      )
+    },
   },
-  },
+  {
+    header: () => <div className="text-center font-medium">Actions</div>,
+    id: "actions",
+    cell: ({ row }) => {
+      const sales = row.original 
+      return (
+        <div className="flex items-center justify-center">
+          <ModalClient sales={sales} />
+          <ModalDeal sales={sales} />
+        </div>
+      )
+    }
+  }
 ]

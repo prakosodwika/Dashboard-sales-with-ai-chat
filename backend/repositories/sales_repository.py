@@ -1,3 +1,4 @@
+from pathlib import Path
 from config.data_provider import DataProvider
 from fastapi import HTTPException
 from dotenv import load_dotenv
@@ -9,11 +10,14 @@ load_dotenv()
 
 app_url = os.getenv("APP_URL")
 port = os.getenv("PORT")
+current_file = Path(__file__).resolve()
+root_dir = current_file.parents[2]
+dummy_data_path = root_dir / "dummyData.json"
 
 class SalesRepository:
   def __init__(
       self, 
-      data_path: str = "dummyData.json", 
+      data_path: str = dummy_data_path, 
     ):
     self.data_provider = DataProvider(data_path)
     try:
