@@ -112,8 +112,14 @@ export function DataTable<TData, TValue>({
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
+                  const isValue = header.id === "amountValueDeals"
+
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead 
+                      key={header.id} 
+                      className={`${isValue ? "text-right": "py-2"}`}
+                      // className="py-2"
+                    >
                       {header.isPlaceholder
                         ? null
                         : flexRender(

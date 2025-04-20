@@ -14,16 +14,26 @@ This project includes the following features:
 ```
 ├── src/              
 │   ├── app/
-│   │    ├── ai-sheet.tsx
-│   │    ├── columns.tsx
-│   │    ├── data-table.tsx
+│   │    ├── sales/
+│   │    │   ├── details
+│   │    │   │   ├── client
+│   │    │   │   │   ├── columns.tsx
+│   │    │   │   │   ├── data-table.tsx
+│   │    │   │   │   └── details.tsx
+│   │    │   │   └── deal
+│   │    │   │       ├── columns.tsx
+│   │    │   │       ├── data-table.tsx
+│   │    │   │       └── details.tsx
+│   │    │   ├── ai-sheet.tsx
+│   │    │   ├── columns.tsx
+│   │    │   ├── data-table.tsx
+│   │    │   └── page.tsx
+│   │    ├── layout.tsx
 │   │    └── page.tsx
 │   ├── components/
-│   ├── lib/
-│   │    ├── fetcher.ts
-│   │    └── types.ts
-│   ├── layout.tsx
-│   └── page.tsx
+│   └── lib/
+│        ├── fetcher.ts
+│        └── types.ts
 ├── public/        
 ├── components.json            
 ├── env.example         
