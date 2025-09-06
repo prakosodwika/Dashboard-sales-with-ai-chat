@@ -1,4 +1,4 @@
-# Coding Challenge: Sales Dashboard with Next.js & FastAPI
+# Sales Dashboard with Next.js & FastAPI + AI Chat
 
 ## Overview
 Your task is to build a simple, full-stack application featuring:
