@@ -1,4 +1,4 @@
-# Sales Dashboard with Next.js & FastAPI + AI Chat
+# Sales Dashboard with Next.js & FastAPI + LLM
 
 ## Overview
 Your task is to build a simple, full-stack application featuring:
